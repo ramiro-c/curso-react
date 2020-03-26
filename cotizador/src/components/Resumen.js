@@ -1,7 +1,7 @@
 import React from 'react';
-import {objectOf, string } from 'prop-types';
+import { objectOf, string } from 'prop-types';
 import styled from '@emotion/styled';
-import {primerLetraAMayuscula} from '../helper';
+import { primerLetraAMayuscula } from '../helper';
 
 const ContenerdorResumen = styled.div`
     background-color: #00838F;

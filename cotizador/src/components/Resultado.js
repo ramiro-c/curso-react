@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { number } from 'prop-types';
 import styled from '@emotion/styled';
 
 const Mensaje = styled.p`
@@ -35,6 +35,10 @@ const Resultado = ({ cotizacion }) => {
                 </ResultadoCotizacion>
             )
     );
+}
+
+Resultado.propTypes = {
+    cotizacion: number.isRequired
 }
 
 export default Resultado;
