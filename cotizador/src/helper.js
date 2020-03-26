@@ -19,3 +19,7 @@ export function calcularPlan(plan){
         return 1.5;
     return null; // error
 }
+
+export function primerLetraAMayuscula(texto){
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}

@@ -1,5 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {objectOf, string } from 'prop-types';
+import styled from '@emotion/styled';
+import {primerLetraAMayuscula} from '../helper';
+
+const ContenerdorResumen = styled.div`
+    background-color: #00838F;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    margin-top: 1rem;
+`;
 
 const Resumen = ({ datos }) => {
     // Extraer datos
@@ -9,14 +19,14 @@ const Resumen = ({ datos }) => {
         return null;
 
     return (
-        <Fragment>
+        <ContenerdorResumen>
             <h2>Resumen de Cotización</h2>
             <ul>
-                <li>Marca: {marca}</li>
-                <li>Plan: {plan}</li>
+                <li>Marca: {primerLetraAMayuscula(marca)}</li>
+                <li>Plan: {primerLetraAMayuscula(plan)}</li>
                 <li>Año del auto: {year}</li>
             </ul>
-        </Fragment>
+        </ContenerdorResumen>
     );
 }
 
