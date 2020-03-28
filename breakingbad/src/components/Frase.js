@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { object } from 'prop-types';
 import styled from '@emotion/styled';
 
 const ContenedorFrase = styled.div`
@@ -35,7 +35,7 @@ const ContenedorFrase = styled.div`
     }
 `;
 
-const Frase = ({frase}) => {
+const Frase = ({ frase }) => {
     return (
         <ContenedorFrase>
             <h1>{frase.quote}</h1>
@@ -43,9 +43,9 @@ const Frase = ({frase}) => {
         </ContenedorFrase>
     );
 }
- 
+
 Frase.propTypes = {
-    
-}
+    frase: object.isRequired
+};
 
 export default Frase;
