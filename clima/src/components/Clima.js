@@ -1,9 +1,10 @@
 import React from 'react';
+import { object } from 'prop-types';
 
 const Clima = ({ resultado }) => {
   // extraer el nombre de la ciudad y los datos
   const { name, main } = resultado;
-  
+
   if (!name) return null;
 
   // transformar la temperatura a grados centigrados
@@ -27,6 +28,10 @@ const Clima = ({ resultado }) => {
       </div>
     </div>
   );
+}
+
+Clima.propTypes = {
+  resultado: object.isRequired
 }
 
 export default Clima;
