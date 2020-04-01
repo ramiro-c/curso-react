@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 
-const Formulario = () => {
-  // state del formulario
-  const [busqueda, guardarBusqueda] = useState({
-    ciudad: '',
-    pais: ''
-  });
+const Formulario = ({busqueda, guardarBusqueda,guardarConsultar}) => {
+  // states
   const [error, guardarError] = useState(false);
   const { ciudad, pais } = busqueda;
 
@@ -25,6 +21,8 @@ const Formulario = () => {
     }
     // eliminar error anterior
     guardarError(false);
+    // post validacion se puede consultar la API
+    guardarConsultar(true);
   }
 
   return (
