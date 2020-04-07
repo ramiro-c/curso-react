@@ -25,7 +25,6 @@ const Heading = styled.h1`
   font-weight: 700;
   font-size: 50px;
   margin-bottom: 50px;
-
   &::after {
     content: "";
     width: 100px;
