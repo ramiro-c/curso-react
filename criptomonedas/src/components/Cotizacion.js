@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { object } from "prop-types";
 
 const Resultado = styled.div`
   color: #fff;
@@ -23,8 +24,6 @@ const Precio = styled.p`
 const Cotizacion = ({ resultado }) => {
   if (Object.keys(resultado).length === 0) return null;
 
-  console.log(resultado);
-
   return (
     <Resultado>
       <Precio>
@@ -37,14 +36,17 @@ const Cotizacion = ({ resultado }) => {
         Precio más bajo del día: <span>{resultado.LOWDAY}</span>
       </Info>
       <Info>
-        Variación de las últimas 24 horas:{" "}
-        <span>{resultado.CHANGEPCT24HOUR}</span>
+        Variación de las últimas 24 horas: <span>{resultado.CHANGEPCT24HOUR}</span>
       </Info>
       <Info>
         Última actualización: <span>{resultado.LASTUPDATE}</span>
       </Info>
     </Resultado>
   );
+};
+
+Cotizacion.propTypes = {
+  resultado: object.isRequired
 };
 
 export default Cotizacion;
