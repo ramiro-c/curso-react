@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
+import Error from "./Error";
 import useMoneda from "../hooks/useMoneda";
 import useCriptomoneda from "../hooks/useCriptomoneda";
-import axios from "axios";
 
 const Boton = styled.input`
   margin-top: 20px;
@@ -22,8 +23,11 @@ const Boton = styled.input`
   }
 `;
 
-const Formulario = () => {
+const Formulario = ({ guardarMoneda, guardarCriptomoneda }) => {
   const [listaCriptomonedas, guardarListaCriptomonedas] = useState([]);
+  const [error, guardarError] = useState(false);
+  const [mensaje, guardarMensaje] = useState("");
+
   const MONEDAS = [
     { cod: "USD", nombre: "Dolar estadounidense" },
     { cod: "MXN", nombre: "Peso mexicano" },
@@ -31,6 +35,7 @@ const Formulario = () => {
     { cod: "GBP", nombre: "Libra esterlina" },
     { cod: "ARS", nombre: "Peso argentino" },
   ];
+
   // Label, stateInicial, opciones
   const [moneda, SelectMonedas] = useMoneda("Elige tu Moneda", "", MONEDAS);
   const [criptomoneda, SelectCriptomonedas] = useCriptomoneda(
@@ -38,31 +43,42 @@ const Formulario = () => {
     "",
     listaCriptomonedas
   );
-  const [error, guardarError] = useState(false);
-  
-  // onSubmit
-  const cotizarMoneda = (e) => {
-    e.preventDefault();
-    // validar los campos
-    if (moneda === "" || criptomoneda === "") {
-      guardarError(true);
-      return;
-    }
-    guardarError(false);
-  };
 
   useEffect(() => {
     const consultarAPI = async () => {
       const url =
         "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD";
+      // Resultado de la API
       const resultado = await axios.get(url);
-      guardarListaCriptomonedas(resultado);
+      if (resultado.Response !== "Error") {
+        guardarListaCriptomonedas(resultado.data.Data);
+      } else {
+        guardarError(true);
+        guardarMensaje("Hubo un error, intente con otras opciones");
+      }
     };
     consultarAPI();
   }, [guardarListaCriptomonedas]);
 
+  // onSubmit
+  const cotizarMoneda = (e) => {
+    e.preventDefault();
+    // Validar los campos
+    if (moneda === "" || criptomoneda === "") {
+      guardarError(true);
+      guardarMensaje("Todos los campos son obligatorios");
+      return;
+    }
+    // Limpiar errores anteriores
+    guardarError(false);
+    // Pasar los datos al componente principal
+    guardarMoneda(moneda);
+    guardarCriptomoneda(criptomoneda);
+  };
+
   return (
     <form onSubmit={cotizarMoneda}>
+      {error ? <Error mensaje={mensaje} /> : null}
       <SelectMonedas />
       <SelectCriptomonedas />
       <Boton type="submit" value="Calcular" />
