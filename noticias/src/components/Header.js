@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Header = ({ titulo }) => (
   <nav className="nav-wrapper light-blue darken-3">
@@ -7,5 +8,9 @@ const Header = ({ titulo }) => (
     </a>
   </nav>
 );
+
+Header.propTypes = {
+  titulo: PropTypes.string.isRequired,
+};
 
 export default Header;
