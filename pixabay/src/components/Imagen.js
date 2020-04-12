@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Imagen = ({ imagen }) => {
   const {
@@ -24,7 +25,7 @@ const Imagen = ({ imagen }) => {
           <a
             href={largeImageURL}
             target="_blank"
-            type="noopener noreferrer"
+            rel="noopener noreferrer"
             className="btn btn-primary btn-block"
           >
             Ver Imagen
@@ -33,6 +34,10 @@ const Imagen = ({ imagen }) => {
       </div>
     </div>
   );
+};
+
+Imagen.propTypes = {
+  imagen: PropTypes.object.isRequired,
 };
 
 export default Imagen;

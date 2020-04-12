@@ -1,6 +1,6 @@
 import React from "react";
-import Imagen from "./Imagen";
 import PropTypes from "prop-types";
+import Imagen from "./Imagen";
 
 const ListadoImagenes = ({ imagenes }) => {
   return (
