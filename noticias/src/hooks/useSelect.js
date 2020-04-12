@@ -1,22 +1,43 @@
 import React, { useState } from "react";
 
-const useSelect = (stateInicial, opciones) => {
-  const [state, actualizarState] = useState(stateInicial);
+const useSelect = (
+  stateInicialCategoria,
+  stateInicialPais,
+  categorias,
+  paises
+) => {
+  const [stateCategoria, actualizarStateCategoria] = useState(
+    stateInicialCategoria
+  );
+  const [statePais, actualizarStatePais] = useState(stateInicialPais);
 
-  const SelectNoticias = () => (
+  const SelectCategorias = () => (
     <select
       className="browser-default"
-      value={state}
-      onChange={(e) => actualizarState(e.target.value)}
+      value={stateCategoria}
+      onChange={(e) => actualizarStateCategoria(e.target.value)}
     >
-      {opciones.map((opcion) => (
-        <option key={opcion.value} value={opcion.value}>
-          {opcion.label}
+      {categorias.map((categoria) => (
+        <option key={categoria.value} value={categoria.value}>
+          {categoria.label}
         </option>
       ))}
     </select>
   );
-  return [state, SelectNoticias];
+  const SelectPaises = () => (
+    <select
+      className="browser-default"
+      value={statePais}
+      onChange={(e) => actualizarStatePais(e.target.value)}
+    >
+      {paises.map((pais) => (
+        <option key={pais.value} value={pais.value}>
+          {pais.label}
+        </option>
+      ))}
+    </select>
+  );
+  return [stateCategoria, statePais, SelectCategorias, SelectPaises];
 };
 
 export default useSelect;
