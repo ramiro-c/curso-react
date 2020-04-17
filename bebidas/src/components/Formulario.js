@@ -42,7 +42,6 @@ const Formulario = () => {
             onChange={obtenerDatosReceta}
           />
         </div>
-
         <div className="col-md-4">
           <select
             className="form-control"
