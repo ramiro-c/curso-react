@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-const Fromulario = () => {
+const Fromulario = ({ error, guardarError, guardarBusquedaLetra }) => {
   const [busqueda, guardarBusqueda] = useState({ artista: "", cancion: "" });
-  const [error, guardarError] = useState(false);
   const { artista, cancion } = busqueda;
 
   const actualizarState = (e) => {
@@ -15,10 +14,17 @@ const Fromulario = () => {
   const realizarBusqueda = (e) => {
     e.preventDefault();
     if (artista.trim() === "" || cancion.trim() === "") {
-      guardarError(true);
+      guardarError({
+        mensaje: "Todos los campos son obligatorios",
+        value: true,
+      });
       return;
     }
-    guardarError(false);
+    guardarError({
+      mensaje: "",
+      value: false,
+    });
+    guardarBusquedaLetra(busqueda);
   };
 
   return (
@@ -33,6 +39,11 @@ const Fromulario = () => {
               <legend className="text-center">
                 Buscador de Letras de Canciones
               </legend>
+              {error.value ? (
+                <p className="alert alert-danger text-center p-2">
+                  Todos los campos son obligatorios
+                </p>
+              ) : null}
               <div className="row">
                 <div className="col-md-6">
                   <div class="form-group">
@@ -71,15 +82,3 @@ const Fromulario = () => {
 };
 
 export default Fromulario;
-
-{
-  /*<!--a href={`https://${info.strFacebook}`} target="_blank" rel="noopener noreferrer">
-    <i className="fab fa-facebook"></i>
-</a>
-<a href={`https://${info.strTwitter}`} target="_blank" rel="noopener noreferrer">
-    <i className="fab fa-twitter"></i>
-</a>
-<a href={`${info.strLastFMChart}`} target="_blank" rel="noopener noreferrer">
-    <i className="fab fa-lastfm"></i>
-</a-->*/
-}
