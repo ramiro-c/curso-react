@@ -11,6 +11,7 @@ const Layout = ({ children }) => {
           :root {
             --gris: #3d3d3d;
             --gris2: #6f6f6f;
+            --gris3: #e1e1e1;
             --naranja: #da552f;
           }
           html {
@@ -58,7 +59,7 @@ const Layout = ({ children }) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
           integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU="
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         />
         <link
           href="https://fonts.googleapis.com/css?family=PT+Sans:400,700|Roboto+Slab:400,700&display=swap"
