@@ -29,7 +29,7 @@ const Logo = styled.p`
   margin-right: 2rem;
 `;
 
-const Nav = styled.div`
+const Botones = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -38,20 +38,25 @@ const Saludo = styled.div`
   margin-right: 2rem;
 `;
 
+const Nav = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Header = () => {
   const usuario = true;
 
   return (
     <Contenido>
       <ContenedorHeader>
-        <div>
+        <Nav>
           <Link href="/">
             <Logo>P</Logo>
           </Link>
           <Buscar />
           <Navegacion />
-        </div>
-        <Nav>
+        </Nav>
+        <Botones>
           {usuario ? (
             <Fragment>
               <Saludo>Hola: Ramiro</Saludo>
@@ -67,7 +72,7 @@ const Header = () => {
               </Link>
             </Fragment>
           )}
-        </Nav>
+        </Botones>
       </ContenedorHeader>
     </Contenido>
   );
