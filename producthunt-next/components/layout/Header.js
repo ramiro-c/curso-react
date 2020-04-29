@@ -44,7 +44,7 @@ const Nav = styled.div`
 `;
 
 const Header = () => {
-  const usuario = true;
+  const usuario = false;
 
   return (
     <Contenido>
@@ -64,10 +64,10 @@ const Header = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <Link href="/">
+              <Link href="/login">
                 <Boton bgColor="true">Login</Boton>
               </Link>
-              <Link href="/">
+              <Link href="/crear_cuenta">
                 <Boton>Crear Cuenta</Boton>
               </Link>
             </Fragment>
