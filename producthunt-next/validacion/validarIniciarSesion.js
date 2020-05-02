@@ -1,3 +1,5 @@
+import { validarEmail, validarPassword } from "./helpers";
+
 export default function validarCrearCuenta(valores) {
   let errores = {};
 

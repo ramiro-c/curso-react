@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import Router from "next/router";
 import Layout from "../components/layout/Layout";
+import { Titulo } from "../components/misc";
 import {
   Formulario,
   Campo,
@@ -15,11 +15,6 @@ import validarIniciarSesion from "../validacion/validarIniciarSesion";
 
 // firebase
 import firebase from "../firebase";
-
-const Titulo = styled.h1`
-  text-align: center;
-  margin-top: 5rem;
-`;
 
 const STATE_INICIAL = {
   email: "",
