@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import Layout from "../components/layout/Layout";
-import { Titulo } from "../components/misc";
-import {
-  Formulario,
-  Campo,
-  InputSubmit,
-  Error,
-} from "../components/ui/Formulario";
+import { Titulo } from "../components/misc/styledComponents";
+import { InputSubmit } from "../components/ui/Input";
+import { Formulario, Campo, Error } from "../components/ui/Formulario";
 
 // validaciones
 import useValidacion from "../hooks/useValidacion";

@@ -9,13 +9,14 @@ import {
   ContenedorHeader,
   Logo,
   Saludo,
-} from "../misc/styledComponents.js";
+} from "../misc/styledComponents";
 
 // firebase
 import { FirebaseContext } from "../../firebase";
 
 const Header = () => {
   const { usuario, firebase } = useContext(FirebaseContext);
+
   return (
     <Contenido>
       <ContenedorHeader>

@@ -5,7 +5,6 @@ export default function validarCrearCuenta(valores) {
 
   // validar el email
   errores = validarEmail(errores, valores);
-
   // validar el password
   errores = validarPassword(errores, valores);
 

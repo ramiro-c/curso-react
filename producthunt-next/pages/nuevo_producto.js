@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Router from "next/router";
 import Layout from "../components/layout/Layout";
 import Error404 from "../components/layout/404";
-import { Titulo } from "../components/misc";
-import {
-  Formulario,
-  Campo,
-  InputSubmit,
-  Error,
-} from "../components/ui/Formulario";
+import { Titulo } from "../components/misc/styledComponents";
+import { InputSubmit } from "../components/ui/Input";
+import { Formulario, Campo, Error } from "../components/ui/Formulario";
 
 // validaciones
 import useValidacion from "../hooks/useValidacion";
@@ -25,12 +21,13 @@ const STATE_INICIAL = {
   url: "",
   descripcion: "",
 };
+
 const NuevoProducto = () => {
   // state de las imagenes
-  const [nombreimagen, guardarNombre] = useState("");
+  const [nombreImagen, guardarNombreImagen] = useState("");
   const [subiendo, guardarSubiendo] = useState(false);
   const [progreso, guardarProgreso] = useState(0);
-  const [urlimagen, guardarUrlImagen] = useState("");
+  const [urlImagen, guardarUrlImagen] = useState("");
   const [error, guardarError] = useState(false);
   const {
     valores,
@@ -42,22 +39,19 @@ const NuevoProducto = () => {
 
   const { nombre, empresa, imagen, url, descripcion } = valores;
 
-  // hook de routing para redireccionar
-  const router = useRouter();
-
   // context con las operaciones crud de firebase
   const { usuario, firebase } = useContext(FirebaseContext);
 
   async function crearProducto() {
     // si el usuario no esta autenticado llevar al login
-    if (!usuario) return router.push("/login");
+    if (!usuario) return Router.push("/login");
 
     // crear el objeto de nuevo producto
     const producto = {
       nombre,
       empresa,
       url,
-      urlimagen,
+      urlImagen,
       descripcion,
       votos: 0,
       comentarios: [],
@@ -68,7 +62,35 @@ const NuevoProducto = () => {
       },
       haVotado: [],
     };
+    //insertarlo en la bbdd
+    firebase.db.collection("productos").add(producto);
+
+    router.push("/");
   }
+
+  // handlers
+  const handleUploadStart = () => {
+    guardarProgreso(0);
+    guardarSubiendo(true);
+  };
+
+  const handleProgress = (progreso) => guardarProgreso({ progreso });
+
+  const handleUploadError = (error) => {
+    guardarError(error);
+    console.error(error);
+  };
+
+  const handleUploadSuccess = (nombre) => {
+    guardarProgreso(100);
+    guardarSubiendo(false);
+    guardarNombreImagen(nombre);
+    firebase.storage
+      .ref("productos")
+      .child(nombre)
+      .getDownloadURL()
+      .then((url) => guardarUrlImagen(url));
+  };
 
   if (!usuario) return <Error404 />;
 
@@ -77,7 +99,7 @@ const NuevoProducto = () => {
       <Titulo>Nuevo Producto</Titulo>
       <Formulario onSubmit={handleSubmit} noValidate>
         <fieldset>
-          <legend>Información General </legend>
+          <legend>Información General</legend>
           <Campo>
             <label htmlFor="empresa">Empresa</label>
             <input
@@ -91,6 +113,20 @@ const NuevoProducto = () => {
             />
           </Campo>
           {errores.empresa && <Error>{errores.empresa}</Error>}
+          <Campo>
+            <label htmlFor="imagen">Imagen</label>
+            <FileUploader
+              accept="image/*"
+              id="imagen"
+              name="imagen"
+              randomizeFilename
+              storageRef={firebase.storage.ref("productos")}
+              onUploadStart={handleUploadStart}
+              onUploadError={handleUploadError}
+              onUploadSuccess={handleUploadSuccess}
+              onProgress={handleProgress}
+            />
+          </Campo>
           <Campo>
             <label htmlFor="url">URL</label>
             <input
@@ -108,7 +144,6 @@ const NuevoProducto = () => {
 
         <fieldset>
           <legend>Sobre tu Producto</legend>
-
           <Campo>
             <label htmlFor="descripcion">Descripcion</label>
             <textarea
