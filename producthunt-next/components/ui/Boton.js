@@ -35,6 +35,7 @@ export const ButtonSubmit = styled.button`
   right: 1rem;
   top: 1px;
   border: none;
+  text-indent: -9999px;
   &:hover {
     cursor: pointer;
   }

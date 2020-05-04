@@ -1,17 +1,17 @@
 import React from "react";
-import Layout from "../components/layout/Layout";
-import DetallesProducto from "../components/layout/DetallesProducto";
+import Layout from "./Layout";
+import DetallesProducto from "./DetallesProducto";
 
 const ListadoProductos = ({ productos }) => {
   return (
     <Layout>
       <div className="listado-productos">
         <div className="contenedor">
-          <div className="bg-white">
+          <ul className="bg-white">
             {productos.map((producto) => (
               <DetallesProducto key={producto.id} producto={producto} />
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </Layout>

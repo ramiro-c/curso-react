@@ -11,12 +11,12 @@ const useProductos = (orden) => {
       firebase.db
         .collection("productos")
         .orderBy(orden, "desc")
-        .onSnapshot(manejarSnapshot);
+        .onSnapshot(handleSnapshot);
     };
     obtenerProductos();
   }, []);
 
-  function manejarSnapshot(snapshot) {
+  function handleSnapshot(snapshot) {
     const productos = snapshot.docs.map((doc) => {
       return {
         id: doc.id,
