@@ -1,12 +1,9 @@
 import React from "react";
-import Layout from "../components/layout/Layout";
+import useProductos from "../hooks/useProductos";
 
 const Populares = () => {
-  return (
-    <Layout>
-      <h1>Populares</h1>
-    </Layout>
-  );
+  const productos = useProductos("votos");
+  return <ListadoProductos productos={productos} />;
 };
 
 export default Populares;
