@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import Layout from "../components/layout/Layout";
-import Error404 from "../components/layout/404";
+import Error404 from "../components/layout/Error404";
 import { Titulo } from "../components/misc/styledComponents";
 import { InputSubmit } from "../components/ui/Input";
 import { Formulario, Campo, Error } from "../components/ui/Formulario";
@@ -37,14 +37,17 @@ const NuevoProducto = () => {
     handleBlur,
   } = useValidacion(STATE_INICIAL, validarCrearProducto, crearProducto);
 
-  const { nombre, empresa, imagen, url, descripcion } = valores;
+  const { nombre, empresa, url, descripcion } = valores;
+
+  // hook de routing para redireccionar
+  const router = useRouter();
 
   // context con las operaciones crud de firebase
   const { usuario, firebase } = useContext(FirebaseContext);
 
   async function crearProducto() {
     // si el usuario no esta autenticado llevar al login
-    if (!usuario) return Router.push("/login");
+    if (!usuario) return router.push("/login");
 
     // crear el objeto de nuevo producto
     const producto = {
@@ -62,6 +65,7 @@ const NuevoProducto = () => {
       },
       haVotado: [],
     };
+
     //insertarlo en la bbdd
     firebase.db.collection("productos").add(producto);
 
@@ -92,7 +96,11 @@ const NuevoProducto = () => {
       .then((url) => guardarUrlImagen(url));
   };
 
-  if (!usuario) return <Error404 />;
+  if (!usuario) {
+    return (
+      <Error404 mensaje="Debe iniciar sesion para agregar un nuevo producto" />
+    );
+  }
 
   return (
     <Layout>
@@ -101,11 +109,24 @@ const NuevoProducto = () => {
         <fieldset>
           <legend>Información General</legend>
           <Campo>
+            <label htmlFor="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Nombre del Producto"
+              name="nombre"
+              value={nombre}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </Campo>
+          {errores.nombre && <Error>{errores.nombre}</Error>}
+          <Campo>
             <label htmlFor="empresa">Empresa</label>
             <input
               type="text"
               id="empresa"
-              placeholder="Nombre Empresa o Compañia"
+              placeholder="Nombre Empresa"
               name="empresa"
               value={empresa}
               onChange={handleChange}

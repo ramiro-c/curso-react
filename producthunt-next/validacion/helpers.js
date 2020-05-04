@@ -26,6 +26,7 @@ export function validarPassword(errores, valores) {
   return errores;
 }
 
+// validar la empresa
 export function validarEmpresa(errores, valores) {
   if (valores.empresa === "") {
     errores.empresa = "Nombre de Empresa es obligatorio";
