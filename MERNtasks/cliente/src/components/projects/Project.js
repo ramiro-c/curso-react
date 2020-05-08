@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import projectContext from "../../context/projects/projectContext";
+import ProjectContext from "../../context/projects/projectContext";
 
 const Project = ({ project }) => {
-  const { actualProject } = useContext(projectContext);
+  const { actualProject } = useContext(ProjectContext);
   const { id, name } = project;
 
   return (

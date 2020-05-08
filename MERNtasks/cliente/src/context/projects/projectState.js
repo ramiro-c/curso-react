@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import uuid from "uuid/dist/v4";
-import projectContext from "./projectContext";
+import ProjectContext from "./projectContext";
 import projectReducer from "./projectReducer";
 import {
   PROJECT_FORM,
@@ -65,7 +65,7 @@ const ProjectState = ({ children }) => {
   };
 
   return (
-    <projectContext.Provider
+    <ProjectContext.Provider
       value={{
         project: state.project,
         projects: state.projects,
@@ -80,7 +80,7 @@ const ProjectState = ({ children }) => {
       }}
     >
       {children}
-    </projectContext.Provider>
+    </ProjectContext.Provider>
   );
 };
 

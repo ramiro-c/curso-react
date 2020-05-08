@@ -1,5 +1,5 @@
 import React, { useState, useContext, Fragment } from "react";
-import projectContext from "../../context/projects/projectContext";
+import ProjectContext from "../../context/projects/projectContext";
 
 const NewProjectForm = () => {
   const [project, setProject] = useState({
@@ -7,7 +7,7 @@ const NewProjectForm = () => {
   });
   const { name } = project;
 
-  const { form_error, showFormError, addProject } = useContext(projectContext);
+  const { form_error, showFormError, addProject } = useContext(ProjectContext);
 
   const onChange = (e) => {
     setProject({

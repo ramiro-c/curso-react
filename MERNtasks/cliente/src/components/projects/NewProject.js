@@ -1,9 +1,9 @@
 import React, { Fragment, useContext } from "react";
-import projectContext from "../../context/projects/projectContext";
+import ProjectContext from "../../context/projects/projectContext";
 import NewProjectForm from "./NewProjectForm";
 
 const NewProject = () => {
-  const { form, showForm } = useContext(projectContext);
+  const { form, showForm } = useContext(ProjectContext);
   const handleOnClick = () => {
     showForm();
   };
