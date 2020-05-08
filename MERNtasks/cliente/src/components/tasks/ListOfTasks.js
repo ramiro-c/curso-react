@@ -1,7 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import Task from "./Task";
+import projectContext from "../../context/projects/projectContext";
 
 const ListOfTasks = () => {
+  const { project } = useContext(projectContext);
+
+  if (!project) return <h2>Select a project</h2>;
+
+  const [actualProject] = project;
   const tasks = [
     { name: "Task1", done: true },
     { name: "Task2", done: false },
@@ -12,6 +18,7 @@ const ListOfTasks = () => {
 
   return (
     <Fragment>
+      <h2>Project: {actualProject.name}</h2>
       <ul className="listado-tareas">
         {tasks.length === 0 ? (
           <li className="tarea">
