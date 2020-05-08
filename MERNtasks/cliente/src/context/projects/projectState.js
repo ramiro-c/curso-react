@@ -4,10 +4,11 @@ import projectContext from "./projectContext";
 import projectReducer from "./projectReducer";
 import {
   PROJECT_FORM,
-  GET_PROJECTS,
-  ADD_PROJECT,
   VALIDATE_FORM,
   ACTUAL_PROJECT,
+  GET_PROJECTS,
+  ADD_PROJECT,
+  DELETE_PROJECT,
 } from "../../types";
 
 const ProjectState = ({ children }) => {
@@ -34,6 +35,13 @@ const ProjectState = ({ children }) => {
     dispatch({ type: VALIDATE_FORM });
   };
 
+  const actualProject = (project_id) => {
+    dispatch({
+      type: ACTUAL_PROJECT,
+      payload: project_id,
+    });
+  };
+
   const getProjects = () => {
     dispatch({
       type: GET_PROJECTS,
@@ -49,9 +57,9 @@ const ProjectState = ({ children }) => {
     });
   };
 
-  const actualProject = (project_id) => {
+  const deleteProject = (project_id) => {
     dispatch({
-      type: ACTUAL_PROJECT,
+      type: DELETE_PROJECT,
       payload: project_id,
     });
   };
@@ -65,9 +73,10 @@ const ProjectState = ({ children }) => {
         form_error: state.form_error,
         showForm,
         showFormError,
+        actualProject,
         getProjects,
         addProject,
-        actualProject,
+        deleteProject,
       }}
     >
       {children}

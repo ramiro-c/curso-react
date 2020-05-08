@@ -3,11 +3,12 @@ import Task from "./Task";
 import projectContext from "../../context/projects/projectContext";
 
 const ListOfTasks = () => {
-  const { project } = useContext(projectContext);
+  const { project, deleteProject } = useContext(projectContext);
 
   if (!project) return <h2>Select a project</h2>;
 
   const [actualProject] = project;
+
   const tasks = [
     { name: "Task1", done: true },
     { name: "Task2", done: false },
@@ -28,7 +29,11 @@ const ListOfTasks = () => {
           tasks.map((task) => <Task task={task} />)
         )}
       </ul>
-      <button type="button" className="btn btn-eliminar">
+      <button
+        onClick={() => deleteProject(actualProject.id)}
+        type="button"
+        className="btn btn-eliminar"
+      >
         Delete Project &times;
       </button>
     </Fragment>
