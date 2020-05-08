@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import uuid from "uuid/dist/v4";
 import ProjectContext from "./projectContext";
-import projectReducer from "./projectReducer";
+import ProjectReducer from "./projectReducer";
 import {
   PROJECT_FORM,
   VALIDATE_FORM,
@@ -25,7 +25,7 @@ const ProjectState = ({ children }) => {
     form_error: false,
   };
 
-  const [state, dispatch] = useReducer(projectReducer, initialState);
+  const [state, dispatch] = useReducer(ProjectReducer, initialState);
 
   const showForm = () => {
     dispatch({ type: PROJECT_FORM });
