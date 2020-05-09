@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import Project from "./Project";
-import ProjectContext from "../../context/projects/projectContext";
+import projectContext from "../../context/projects/projectContext";
 
 const ListOfProjects = () => {
-  const { projects, getProjects } = useContext(ProjectContext);
+  const { projects, getProjects } = useContext(projectContext);
 
   useEffect(() => {
     getProjects();

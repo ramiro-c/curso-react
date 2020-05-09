@@ -231,6 +231,7 @@ aside {
   text-align: center;
   font-size: 1.6rem;
   border-radius: 0;
+  padding: 0.65em;
 }
 .mensaje:hover {
   cursor: default;

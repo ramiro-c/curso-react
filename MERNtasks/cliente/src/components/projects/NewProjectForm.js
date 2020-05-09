@@ -1,21 +1,22 @@
 import React, { useState, useContext, Fragment } from "react";
-import ProjectContext from "../../context/projects/projectContext";
+import projectContext from "../../context/projects/projectContext";
 
 const NewProjectForm = () => {
+  const { form_error, showFormError, addProject } = useContext(projectContext);
+
   const [project, setProject] = useState({
     name: "",
   });
   const { name } = project;
 
-  const { form_error, showFormError, addProject } = useContext(ProjectContext);
-
-  const onChange = (e) => {
+  const handleOnChange = (e) => {
     setProject({
       ...project,
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = (e) => {
+
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     if (name === "") {
       showFormError();
@@ -26,7 +27,7 @@ const NewProjectForm = () => {
 
   return (
     <Fragment>
-      <form onSubmit={onSubmit} className="formulario-nuevo-proyecto">
+      <form onSubmit={handleOnSubmit} className="formulario-nuevo-proyecto">
         <input
           type="text"
           className="input-text"
@@ -34,7 +35,7 @@ const NewProjectForm = () => {
           name="name"
           value={name}
           placeholder="Project Name"
-          onChange={onChange}
+          onChange={handleOnChange}
         />
         <input
           type="submit"
