@@ -1,10 +1,10 @@
 import {
   PROJECT_FORM,
-  VALIDATE_FORM,
   ACTUAL_PROJECT,
   GET_PROJECTS,
   ADD_PROJECT,
   DELETE_PROJECT,
+  SET_ERROR_PROJECT_FORM,
 } from "../../types";
 
 export default (state, action) => {
@@ -16,7 +16,7 @@ export default (state, action) => {
         form_error: false,
       };
 
-    case VALIDATE_FORM:
+    case SET_ERROR_PROJECT_FORM:
       return {
         ...state,
         form_error: true,

@@ -1,10 +1,10 @@
 import React, { useReducer } from "react";
 import uuid from "uuid/dist/v4";
-import ProjectContext from "./projectContext";
-import ProjectReducer from "./projectReducer";
+import projectContext from "./projectContext";
+import projectReducer from "./projectReducer";
 import {
   PROJECT_FORM,
-  VALIDATE_FORM,
+  SET_ERROR_PROJECT_FORM,
   ACTUAL_PROJECT,
   GET_PROJECTS,
   ADD_PROJECT,
@@ -25,17 +25,17 @@ const ProjectState = ({ children }) => {
     form_error: false,
   };
 
-  const [state, dispatch] = useReducer(ProjectReducer, initialState);
+  const [state, dispatch] = useReducer(projectReducer, initialState);
 
   const showForm = () => {
     dispatch({ type: PROJECT_FORM });
   };
 
   const showFormError = () => {
-    dispatch({ type: VALIDATE_FORM });
+    dispatch({ type: SET_ERROR_PROJECT_FORM });
   };
 
-  const actualProject = (project_id) => {
+  const setActualProject = (project_id) => {
     dispatch({
       type: ACTUAL_PROJECT,
       payload: project_id,
@@ -65,7 +65,7 @@ const ProjectState = ({ children }) => {
   };
 
   return (
-    <ProjectContext.Provider
+    <projectContext.Provider
       value={{
         project: state.project,
         projects: state.projects,
@@ -73,14 +73,14 @@ const ProjectState = ({ children }) => {
         form_error: state.form_error,
         showForm,
         showFormError,
-        actualProject,
+        setActualProject,
         getProjects,
         addProject,
         deleteProject,
       }}
     >
       {children}
-    </ProjectContext.Provider>
+    </projectContext.Provider>
   );
 };
 
