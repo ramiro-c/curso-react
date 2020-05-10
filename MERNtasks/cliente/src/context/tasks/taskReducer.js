@@ -1,4 +1,9 @@
-import { GET_TASKS, ADD_TASK, SET_ERROR_TASK_FORM } from "../../types";
+import {
+  GET_TASKS,
+  ADD_TASK,
+  SET_ERROR_TASK_FORM,
+  DELETE_TASK,
+} from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -19,8 +24,14 @@ export default (state, action) => {
     case ADD_TASK:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasks: [action.payload, ...state.tasks],
         form_error: false,
+      };
+
+    case DELETE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
 
     default:

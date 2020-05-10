@@ -14,3 +14,4 @@ export const SET_ERROR_TASK_FORM = "SET_ERROR_TASK_FORM";
 
 export const GET_TASKS = "GET_TASKS";
 export const ADD_TASK = "ADD_TASK";
+export const DELETE_TASK = "DELETE_TASK";
