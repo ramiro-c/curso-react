@@ -10,11 +10,11 @@ const ListOfTasks = () => {
 
   if (!project) return <h2>Select a project</h2>;
 
-  const [actualProject] = project;
+  const [actual_project] = project;
 
   return (
     <Fragment>
-      <h2>Project: {actualProject.name}</h2>
+      <h2>Project: {actual_project.name}</h2>
       <ul className="listado-tareas">
         {project_tasks.length === 0 ? (
           <li className="tarea">
@@ -31,7 +31,7 @@ const ListOfTasks = () => {
         )}
       </ul>
       <button
-        onClick={() => deleteProject(actualProject.id)}
+        onClick={() => deleteProject(actual_project.id)}
         type="button"
         className="btn btn-eliminar"
       >

@@ -3,13 +3,22 @@ import taskContext from "../../context/tasks/taskContext";
 import projectContext from "../../context/projects/projectContext";
 
 const Task = ({ task }) => {
-  const { deleteTask, getTasks } = useContext(taskContext);
+  const {
+    setActualTask,
+    deleteTask,
+    getTasks,
+    changeDoneAttribute,
+  } = useContext(taskContext);
   const { project } = useContext(projectContext);
 
   const { name, done } = task;
   const [actual_project] = project;
 
-  const handleOnClick = (task_id, project_id) => {
+  const handleOnClickEditButton = (task) => {
+    setActualTask(task);
+  };
+
+  const handleOnClickDeleteButton = (task_id, project_id) => {
     deleteTask(task_id);
     getTasks(project_id);
   };
@@ -19,23 +28,35 @@ const Task = ({ task }) => {
       <p>{name}</p>
       <div className="estado">
         {done ? (
-          <button type="button" className="completo">
+          <button
+            type="button"
+            className="completo"
+            onClick={() => changeDoneAttribute(task.id)}
+          >
             Done
           </button>
         ) : (
-          <button type="button" className="incompleto">
+          <button
+            type="button"
+            className="incompleto"
+            onClick={() => changeDoneAttribute(task.id)}
+          >
             Incomplete
           </button>
         )}
       </div>
       <div className="acciones">
-        <button type="button" className="btn btn-primario">
+        <button
+          type="button"
+          className="btn btn-primario"
+          onClick={() => handleOnClickEditButton(task)}
+        >
           Edit
         </button>
         <button
           type="button"
           className="btn btn-secundario"
-          onClick={() => handleOnClick(task.id, actual_project.id)}
+          onClick={() => handleOnClickDeleteButton(task.id, actual_project.id)}
         >
           Delete
         </button>

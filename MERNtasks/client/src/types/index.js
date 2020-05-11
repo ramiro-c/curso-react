@@ -12,6 +12,9 @@ export const ACTUAL_PROJECT = "ACTUAL_PROJECT";
 
 export const SET_ERROR_TASK_FORM = "SET_ERROR_TASK_FORM";
 
+export const ACTUAL_TASK = "ACTUAL_TASK";
 export const GET_TASKS = "GET_TASKS";
 export const ADD_TASK = "ADD_TASK";
+export const UPDATE_TASK = "UPDATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
+export const CHANGE_DONE_ATTRIBUTE = "CHANGE_DONE_ATTRIBUTE";
